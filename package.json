@@ -1,0 +1,28 @@
+{
+  "name": "gatsby-source-ghost",
+  "version": "0.0.0",
+  "description": "Gatsby source plugin for building websites using the Ghost API as a data source.",
+  "repository": "git@github.com:TryGhost/gatsby-plugin-ghost.git",
+  "author": "Ghost Foundation",
+  "license": "MIT",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint . --ext .js --cache",
+    "posttest": "yarn lint",
+    "test": "NODE_ENV=testing mocha -- $(find test -name '*.test.js')",
+    "preship": "yarn test",
+    "ship": "STATUS=$(git status --porcelain); echo $STATUS; if [ -z \"$STATUS\" ]; then yarn publish && git push --follow-tags; fi"
+  },
+  "devDependencies": {
+    "eslint": "5.3.0",
+    "eslint-plugin-ghost": "0.0.26",
+    "mocha": "5.2.0",
+    "should": "13.2.3",
+    "sinon": "6.1.5"
+  },
+  "dependencies": {
+    "bluebird": "^3.5.1",
+    "ghost-ignition": "^2.9.4",
+    "lodash": "^4.17.10"
+  }
+}
