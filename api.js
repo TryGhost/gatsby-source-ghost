@@ -1,12 +1,12 @@
 const axios = require('axios');
 const qs = require('qs');
 
-const printError = (...args) => printError(...args); // eslint-disable-line no-console
+const printError = (...args) => console.error('\n', ...args); // eslint-disable-line no-console
 
 module.exports.fetchAllPosts = (options) => {
     if (!options.clientId || !options.clientSecret || !options.adminUrl) {
         printError('Plugin Configuration Missing: gatsby-source-ghost requires your adminUrl, clientId and clientSecret');
-        return;
+        process.exit(1);
     }
 
     const baseApiUrl = `https://${options.adminUrl}/ghost/api/v0.1`;
@@ -23,8 +23,8 @@ module.exports.fetchAllPosts = (options) => {
     return axios.get(postsApiUrl)
         .then(res => res.data.posts)
         .catch((err) => {
-            printError('\nUnable to fetch data from your Ghost API. Perhaps your credentials or adminUrl are incorrect?');
-            printError('\nError:', err);
+            printError('Error:', err);
+            printError('Unable to fetch data from your Ghost API. Perhaps your credentials or adminUrl are incorrect?');
             process.exit(1);
         });
 };
