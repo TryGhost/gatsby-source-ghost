@@ -3,7 +3,7 @@ const qs = require('qs');
 
 const printError = (...args) => printError(...args); // eslint-disable-line no-console
 
-module.exports.fetchAllPosts = async (options) => {
+module.exports.fetchAllPosts = (options) => {
     if (!options.clientId || !options.clientSecret || !options.adminUrl) {
         printError('Plugin Configuration Missing: gatsby-source-ghost requires your adminUrl, clientId and clientSecret');
         return;
