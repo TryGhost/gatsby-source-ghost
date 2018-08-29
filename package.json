@@ -5,6 +5,12 @@
   "repository": "git@github.com:TryGhost/gatsby-plugin-ghost.git",
   "author": "Ghost Foundation",
   "license": "MIT",
+  "keywords": [
+    "gatsby",
+    "ghost",
+    "gatsby-plugin",
+    "gatsby-source-plugin"
+  ],
   "scripts": {
     "lint": "eslint . --ext .js --cache",
     "posttest": "yarn lint",
