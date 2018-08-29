@@ -14,15 +14,15 @@ You need to specify three properties in your `gatsby-config.js`:
 {
    resolve: `gatsby-source-ghost`,
    options: {
-       adminUrl: `<your-subdomain>.ghost.io`,
+       apiUrl: `https://<your-subdomain>.ghost.io`,
        clientId: `ghost-frontend`,
        clientSecret: `<your client secret>`
    }
 }
 ```
 
-`adminUrl`  
- The admin URL of your Ghost site. For Ghost(Pro) customers this is your `.ghost.io` domain. For self hosters it is your main domain unless you have a separate `admin` url configured. Note this URL _must_ work over HTTPS.
+`apiUrl`  
+ The admin or API URL for your Ghost site. For Ghost(Pro) customers this is your `.ghost.io` domain. For self hosters it is your main domain unless you have a separate `admin` url configured. Note that this URL should be served over HTTPS.
  
 `clientId`  
 This is almost always `ghost-frontend`, unless you have a custom client, which is not _yet_ fully supported by Ghost.
