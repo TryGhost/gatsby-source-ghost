@@ -25,6 +25,7 @@ module.exports.fetchAllPosts = (options) => {
         include: 'authors,tags',
         filter: 'page:[true,false]',
         formats: 'plaintext,html',
+        absolute_urls: true,
         limit: 'all'
     };
     const postsApiUrl = `${baseApiUrl}/posts/?${qs.stringify(postApiOptions)}`;
