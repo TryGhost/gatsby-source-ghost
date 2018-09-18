@@ -73,6 +73,21 @@ You can query Post nodes created from Ghost like the following:
 }
 ```
 
+A common but tricky example of filtering posts by tag, can be achieved like this (Gatsby v2+):
+
+```
+{
+  allGhostPost(filter: {tags: {elemMatch {slug: {eq: $slug}}}}) {
+    edges {
+      node {
+        slug
+        ...
+      }
+    }
+  }
+}
+```
+
 You can query Page nodes created from Ghost like the following:
 
 ```
