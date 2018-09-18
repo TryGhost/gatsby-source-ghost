@@ -5,7 +5,7 @@ const printError = (...args) => console.error('\n', ...args); // eslint-disable-
 
 module.exports.fetchAllPosts = (options) => {
     if (!options.clientId || !options.clientSecret || !options.apiUrl) {
-        printError('Plugin Configuration Missing: gatsby-source-ghost requires your adminUrl, clientId and clientSecret');
+        printError('Plugin Configuration Missing: gatsby-source-ghost requires your apiUrl, clientId and clientSecret');
         process.exit(1);
     }
 
