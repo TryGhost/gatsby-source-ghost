@@ -1,6 +1,6 @@
 # Gatsby Source Ghost
 
-Source plugin for pulling data into Gatsby.js from the [Ghost Public API](https://api.ghost.org).
+Source plugin for pulling data into Gatsby.js from the [Ghost Public API](https://docs.ghost.org/api/).
 
 ## Install
 
