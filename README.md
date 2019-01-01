@@ -144,4 +144,4 @@ You can query Author nodes created from Ghost like the following:
 
 # Copyright & License
 
-Copyright (c) 2018 Ghost Foundation - Released under the [MIT license](LICENSE).
+Copyright (c) 2018-2019 Ghost Foundation - Released under the [MIT license](LICENSE).
