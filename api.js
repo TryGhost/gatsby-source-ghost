@@ -1,7 +1,10 @@
 const axios = require('axios');
 const qs = require('qs');
 
-const printError = (...args) => console.error('\n', ...args); // eslint-disable-line no-console
+const reset = '\x1b[0m';
+const printWarning = (...args) => console.error('\n\x1b[33m', ...args, reset); // eslint-disable-line no-console
+const printError = (...args) => console.error('\n\x1b[41m\x1b[37m', ...args, reset); // eslint-disable-line no-console
+const printAPIError = ({message, context, errorType}) => console.error('\n\x1b[31m', errorType + ':', message, context || '', reset); // eslint-disable-line no-console
 
 module.exports.fetchAllPosts = (options) => {
     if (!options.clientId || !options.clientSecret || !options.apiUrl) {
@@ -15,7 +18,7 @@ module.exports.fetchAllPosts = (options) => {
     }
 
     if (options.apiUrl.substring(0, 8) !== 'https://') {
-        printError('Ghost apiUrl should be served over HTTPS, are you sure you want:', options.apiUrl, '?');
+        printWarning('Ghost apiUrl should be served over HTTPS, are you sure you want:', options.apiUrl, '?');
     }
 
     const baseApiUrl = `${options.apiUrl}/ghost/api/v0.1`;
@@ -32,8 +35,13 @@ module.exports.fetchAllPosts = (options) => {
 
     return axios.get(postsApiUrl)
         .then(res => res.data.posts)
-        .catch((err) => {
-            printError('Error:', err);
+        .catch((error) => {
+            if (error.response && error.response.data && error.response.data.errors) {
+                printAPIError(error.response.data.errors[0]);
+            } else {
+                printError('Error:', error.message);
+            }
+
             printError('Unable to fetch data from your Ghost API. Perhaps your credentials or apiUrl are incorrect?');
             process.exit(1);
         });
