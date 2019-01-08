@@ -7,7 +7,7 @@ const getPostCount = function getPostCount(posts, taxonomie) {
 
     // Get all possible taxonimies that are being used and
     // create a usable array
-    posts.forEach(post => allTaxonomies.push(post[taxonomie]));
+    posts.forEach(post => allTaxonomies.push(post[taxonomie] || []));
     allTaxonomies = _.flatten(allTaxonomies);
     allTaxonomies = _.transform(_.uniqBy(allTaxonomies, item => item.id), (result, item) => {
         (result[item.slug] || (result[item.slug] = 0));
@@ -15,9 +15,11 @@ const getPostCount = function getPostCount(posts, taxonomie) {
 
     // Now collect all post slugs per taxonomie
     posts.forEach((post) => {
-        post[taxonomie].forEach((item) => {
-            allTaxonomies[item.slug] += 1;
-        });
+        if (post[taxonomie] && post[taxonomie].length) {
+            post[taxonomie].forEach((item) => {
+                allTaxonomies[item.slug] += 1;
+            });
+        }
     });
 
     return allTaxonomies;

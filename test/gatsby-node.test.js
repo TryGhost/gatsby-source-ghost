@@ -18,11 +18,11 @@ describe('Basic Functionality ', function () {
         // Pass in some fake data
         sandbox.stub(GhostAPI, 'fetchAllPosts').resolves([
             {slug: 'welcome-to-ghost', page: false, tags: [
-                {slug: 'getting-started'},
-                {slug: 'hash-feature-img'}
+                {slug: 'getting-started', id: '1'},
+                {slug: 'hash-feature-img', id: '2'}
             ], authors: [
-                {name: 'Ghost Writer'},
-                {name: 'Ghost Author'}
+                {name: 'Ghost Writer', id: '1'},
+                {name: 'Ghost Author', id: '2'}
             ]},
             {slug: 'about', page: true}
         ]);
