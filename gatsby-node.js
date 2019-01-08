@@ -2,7 +2,7 @@ const GhostAPI = require('./api');
 const _ = require('lodash');
 const {PostNode, PageNode, TagNode, AuthorNode} = require('./nodes');
 
-const getPostsPerTaxonomie = function getPostsPerTaxonomie(posts, taxonomie) {
+const getPostCount = function getPostCount(posts, taxonomie) {
     let allTaxonomies = [];
 
     // Get all possible taxonimies that are being used and
@@ -29,8 +29,8 @@ exports.sourceNodes = ({boundActionCreators}, configOptions) => {
     return GhostAPI
         .fetchAllPosts(configOptions)
         .then((posts) => {
-            const tagPostCount = getPostsPerTaxonomie(posts, 'tags');
-            const authorPostCount = getPostsPerTaxonomie(posts, 'authors');
+            const tagPostCount = getPostCount(posts, 'tags');
+            const authorPostCount = getPostCount(posts, 'authors');
 
             posts.forEach((post) => {
                 if (post.page) {
