@@ -1,11 +1,8 @@
 // Switch these lines once there are useful utils
 // const testUtils = require('./utils');
 require('./utils');
+const proxyquire = require('proxyquire');
 const sandbox = sinon.createSandbox();
-
-// Thing we are testing
-const gatsbyNode = require('../gatsby-node');
-const GhostAPI = require('../api');
 
 describe('Basic Functionality ', function () {
     afterEach(() => {
@@ -16,16 +13,36 @@ describe('Basic Functionality ', function () {
         const createNode = sandbox.stub();
 
         // Pass in some fake data
-        sandbox.stub(GhostAPI, 'fetchAllPosts').resolves([
-            {slug: 'welcome-to-ghost', page: false, tags: [
+        const browsePosts = sinon.stub().resolves([
+            {slug: 'welcome-to-ghost', tags: [
                 {slug: 'getting-started', id: '1'},
                 {slug: 'hash-feature-img', id: '2'}
             ], authors: [
                 {name: 'Ghost Writer', id: '1'},
                 {name: 'Ghost Author', id: '2'}
-            ]},
-            {slug: 'about', page: true}
+            ]}
         ]);
+        const browsePages = sinon.stub().resolves([
+            {slug: 'about'}
+        ]);
+        const browseTags = sinon.stub().resolves([
+            {slug: 'getting-started', id: '1', count: {posts: 1}},
+            {slug: 'hash-feature-img', id: '2', count: {posts: 1}}
+        ]);
+        const browseAuthors = sinon.stub().resolves([
+            {name: 'Ghost Writer', id: '1', count: {posts: 1}},
+            {name: 'Ghost Author', id: '2', count: {posts: 1}}
+        ]);
+        const GhostContentApiStub = function () {
+            return {
+                posts: {browse: browsePosts},
+                pages: {browse: browsePages},
+                tags: {browse: browseTags},
+                authors: {browse: browseAuthors}
+            };
+        };
+
+        const gatsbyNode = proxyquire('../gatsby-node', {'@tryghost/content-api': GhostContentApiStub});
 
         gatsbyNode
             .sourceNodes({boundActionCreators: {createNode}}, {})
@@ -36,11 +53,11 @@ describe('Basic Functionality ', function () {
 
                 // Check that we get the right type of node created
                 getArg(0).internal.should.have.property('type', 'GhostPost');
-                getArg(1).internal.should.have.property('type', 'GhostTag');
+                getArg(1).internal.should.have.property('type', 'GhostPage');
                 getArg(2).internal.should.have.property('type', 'GhostTag');
-                getArg(3).internal.should.have.property('type', 'GhostAuthor');
+                getArg(3).internal.should.have.property('type', 'GhostTag');
                 getArg(4).internal.should.have.property('type', 'GhostAuthor');
-                getArg(5).internal.should.have.property('type', 'GhostPage');
+                getArg(5).internal.should.have.property('type', 'GhostAuthor');
 
                 done();
             })
