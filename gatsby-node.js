@@ -1,5 +1,4 @@
 const GhostContentAPI = require('@tryghost/content-api');
-const _ = require('lodash');
 const Promise = require('bluebird');
 const {PostNode, PageNode, TagNode, AuthorNode} = require('./nodes');
 
