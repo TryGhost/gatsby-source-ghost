@@ -10,44 +10,36 @@ exports.sourceNodes = ({boundActionCreators}, configOptions) => {
         key: configOptions.contentApiKey,
         version: 'v2'
     });
-    const fetchOptions = {
+
+    const postAndPageFetchOptions = {
         limit: 'all',
         include: 'tags,authors',
         formats: 'html,plaintext'
     };
 
-    const fetchPosts = api.posts.browse(fetchOptions).then((posts) => {
-        posts.forEach((post) => {
-            createNode(PostNode(post));
-        });
+    const fetchPosts = api.posts.browse(postAndPageFetchOptions).then((posts) => {
+        posts.forEach(post => createNode(PostNode(post)));
     });
 
-    const fetchPages = api.pages.browse(fetchOptions).then((pages) => {
-        pages.forEach((page) => {
-            createNode(PageNode(page));
-        });
+    const fetchPages = api.pages.browse(postAndPageFetchOptions).then((pages) => {
+        pages.forEach(page => createNode(PageNode(page)));
     });
 
-    const fetchTags = api.tags.browse({
+    const tagAndAuthorFetchOptions = {
         limit: 'all',
         include: 'count.posts'
-    }).then((tags) => {
+    };
+
+    const fetchTags = api.tags.browse(tagAndAuthorFetchOptions).then((tags) => {
         tags.forEach((tag) => {
-            let postCount = tag.count.posts;
-            tag.postCount = postCount;
-            delete tag.count;
+            tag.postCount = tag.count.posts;
             createNode(TagNode(tag));
         });
     });
 
-    const fetchAuthors = api.authors.browse({
-        limit: 'all',
-        include: 'count.posts'
-    }).then((authors) => {
+    const fetchAuthors = api.authors.browse(tagAndAuthorFetchOptions).then((authors) => {
         authors.forEach((author) => {
-            let postCount = author.count.posts;
-            author.postCount = postCount;
-            delete author.count;
+            author.postCount = author.count.posts;
             createNode(AuthorNode(author));
         });
     });
