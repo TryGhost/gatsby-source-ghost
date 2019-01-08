@@ -3,29 +3,6 @@ const _ = require('lodash');
 const Promise = require('bluebird');
 const {PostNode, PageNode, TagNode, AuthorNode} = require('./nodes');
 
-const getPostCount = function getPostCount(posts, taxonomy) {
-    let allTaxonomies = [];
-
-    // Get all possible taxonomies that are being used and
-    // create a usable array
-    posts.forEach(post => allTaxonomies.push(post[taxonomy] || []));
-    allTaxonomies = _.flatten(allTaxonomies);
-    allTaxonomies = _.transform(_.uniqBy(allTaxonomies, item => item.id), (result, item) => {
-        (result[item.slug] || (result[item.slug] = 0));
-    }, {});
-
-    // Now collect all post slugs per taxonomy
-    posts.forEach((post) => {
-        if (post[taxonomy] && post[taxonomy].length) {
-            post[taxonomy].forEach((item) => {
-                allTaxonomies[item.slug] += 1;
-            });
-        }
-    });
-
-    return allTaxonomies;
-};
-
 exports.sourceNodes = ({boundActionCreators}, configOptions) => {
     const {createNode} = boundActionCreators;
     const api = new GhostContentAPI({
@@ -43,36 +20,37 @@ exports.sourceNodes = ({boundActionCreators}, configOptions) => {
         posts.forEach((post) => {
             createNode(PostNode(post));
         });
-        return posts;
     });
 
     const fetchPages = api.pages.browse(fetchOptions).then((pages) => {
         pages.forEach((page) => {
             createNode(PageNode(page));
         });
-        return pages;
     });
 
-    return Promise.all([fetchPosts, fetchPages]).then(([posts, pages]) => {
-        const allPostsAndPages = [...posts, ...pages];
-        const tagPostCount = getPostCount(allPostsAndPages, 'tags');
-        const authorPostCount = getPostCount(allPostsAndPages, 'authors');
-
-        const createTagNode = (tag) => {
-            // find the number of posts that have this tag
-            tag.postCount = tagPostCount[tag.slug] || 0;
+    const fetchTags = api.tags.browse({
+        limit: 'all',
+        include: 'count.posts'
+    }).then((tags) => {
+        tags.forEach((tag) => {
+            let postCount = tag.count.posts;
+            tag.postCount = postCount;
+            delete tag.count;
             createNode(TagNode(tag));
-        };
-
-        const createAuthorNode = (author) => {
-            // find the number of posts that include this author
-            author.postCount = authorPostCount[author.slug] || 0;
-            createNode(AuthorNode(author));
-        };
-
-        allPostsAndPages.forEach((postOrPage) => {
-            (postOrPage.tags || []).forEach(createTagNode);
-            (postOrPage.authors || []).forEach(createAuthorNode);
         });
     });
+
+    const fetchAuthors = api.authors.browse({
+        limit: 'all',
+        include: 'count.posts'
+    }).then((authors) => {
+        authors.forEach((author) => {
+            let postCount = author.count.posts;
+            author.postCount = postCount;
+            delete author.count;
+            createNode(AuthorNode(author));
+        });
+    });
+
+    return Promise.all([fetchPosts, fetchPages, fetchTags, fetchAuthors]);
 };
