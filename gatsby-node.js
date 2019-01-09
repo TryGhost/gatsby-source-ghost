@@ -1,6 +1,6 @@
 const GhostContentAPI = require('@tryghost/content-api');
 const Promise = require('bluebird');
-const {PostNode, PageNode, TagNode, AuthorNode} = require('./nodes');
+const {PostNode, PageNode, TagNode, AuthorNode, SettingsNode} = require('./nodes');
 
 exports.sourceNodes = ({boundActionCreators}, configOptions) => {
     const {createNode} = boundActionCreators;
@@ -43,5 +43,7 @@ exports.sourceNodes = ({boundActionCreators}, configOptions) => {
         });
     });
 
-    return Promise.all([fetchPosts, fetchPages, fetchTags, fetchAuthors]);
+    const fetchSettings = api.settings.browse().then(setting => createNode(SettingsNode(setting)));
+
+    return Promise.all([fetchPosts, fetchPages, fetchTags, fetchAuthors, fetchSettings]);
 };
