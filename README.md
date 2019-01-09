@@ -73,7 +73,7 @@ A common but tricky example of filtering posts by tag, can be achieved like this
 
 ```
 {
-  allGhostPost(filter: {tags: {elemMatch {slug: {eq: $slug}}}}) {
+  allGhostPost(filter: {tags: {elemMatch: {slug: {eq: $slug}}}}) {
     edges {
       node {
         slug
