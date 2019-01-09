@@ -29,9 +29,9 @@ The "Content API Key" copied from the "Integrations" screen in Ghost Admin.
 
 ## How to query
 
-There are 4 node types available from Ghost: Post, Page, Author and Tag.
+There are 5 node types available from Ghost: Post, Page, Author, Tag, and Settings.
 
-Documentation for the full set of fields made available for each resource type can be found in the [Public API docs](https://api.ghost.org/docs/post).
+Documentation for the full set of fields made available for each resource type can be found in the [Content API docs](https://docs.ghost.org/api/content/).
 
 Posts and Pages have the same properties.
 
@@ -129,6 +129,23 @@ You can query Author nodes created from Ghost like the following:
         id
         slug
         name
+        ...
+      }
+    }
+  }
+}
+```
+
+You can query the Settings node created from Ghost like the following:
+
+```
+{
+  allGhostSettings {
+    edges {
+      node {
+        title
+        description
+        lang
         ...
       }
     }
