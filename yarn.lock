@@ -18,9 +18,10 @@
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/@sinonjs/samsam/-/samsam-2.0.0.tgz#9163742ac35c12d3602dece74317643b35db6a80"
 
-"@tryghost/content-api@0.3.3":
-  version "0.3.3"
-  resolved "https://registry.yarnpkg.com/@tryghost/content-api/-/content-api-0.3.3.tgz#7dbabc530ebce88bd8b5acfccc60641af05fa274"
+"@tryghost/content-api@1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@tryghost/content-api/-/content-api-1.0.0.tgz#34da08f5f5e799d9ec31940df554072b7e5ef57c"
+  integrity sha512-FayuhBjanKC75/rwdkvmu8AxaZymnFavN8yFc3mCbt88T38BZGA3Hgf1YUiC2F13OaCPpdCoEGWIOXKuHIXl2Q==
   dependencies:
     axios "0.18.0"
     ghost-ignition "^2.9.6"

@@ -28,7 +28,7 @@
     "sinon": "6.1.5"
   },
   "dependencies": {
-    "@tryghost/content-api": "0.3.3",
+    "@tryghost/content-api": "1.0.0",
     "bluebird": "^3.5.1",
     "gatsby-node-helpers": "^0.3.0",
     "qs": "^6.5.2"
