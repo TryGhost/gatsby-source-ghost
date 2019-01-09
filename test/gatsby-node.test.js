@@ -33,12 +33,20 @@ describe('Basic Functionality ', function () {
             {name: 'Ghost Writer', id: '1', count: {posts: 1}},
             {name: 'Ghost Author', id: '2', count: {posts: 1}}
         ]);
+        const browseSettings = sinon.stub().resolves(
+            {
+                title: 'Ghost & Gatsby',
+                description: 'Thoughts, stories and ideas.',
+                navigation: [{label: 'Home', url: '/'}]
+            }
+        );
         const GhostContentApiStub = function () {
             return {
                 posts: {browse: browsePosts},
                 pages: {browse: browsePages},
                 tags: {browse: browseTags},
-                authors: {browse: browseAuthors}
+                authors: {browse: browseAuthors},
+                settings: {browse: browseSettings}
             };
         };
 
@@ -47,7 +55,7 @@ describe('Basic Functionality ', function () {
         gatsbyNode
             .sourceNodes({boundActionCreators: {createNode}}, {})
             .then(() => {
-                createNode.callCount.should.eql(6);
+                createNode.callCount.should.eql(7);
 
                 const getArg = call => createNode.getCall(call).args[0];
 
@@ -58,6 +66,7 @@ describe('Basic Functionality ', function () {
                 getArg(3).internal.should.have.property('type', 'GhostTag');
                 getArg(4).internal.should.have.property('type', 'GhostAuthor');
                 getArg(5).internal.should.have.property('type', 'GhostAuthor');
+                getArg(6).internal.should.have.property('type', 'GhostSettings');
 
                 done();
             })
