@@ -1,14 +1,10 @@
-const GhostContentAPI = require('@tryghost/content-api');
 const Promise = require('bluebird');
+const ContentAPI = require('./content-api');
 const {PostNode, PageNode, TagNode, AuthorNode, SettingsNode} = require('./ghost-nodes');
 
 exports.sourceNodes = ({boundActionCreators}, configOptions) => {
     const {createNode} = boundActionCreators;
-    const api = new GhostContentAPI({
-        host: configOptions.apiUrl,
-        key: configOptions.contentApiKey,
-        version: 'v2'
-    });
+    const api = ContentAPI.configure(configOptions);
 
     const postAndPageFetchOptions = {
         limit: 'all',
