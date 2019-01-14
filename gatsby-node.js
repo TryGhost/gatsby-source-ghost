@@ -1,6 +1,6 @@
 const GhostContentAPI = require('@tryghost/content-api');
 const Promise = require('bluebird');
-const {PostNode, PageNode, TagNode, AuthorNode, SettingsNode} = require('./nodes');
+const {PostNode, PageNode, TagNode, AuthorNode, SettingsNode} = require('./ghost-nodes');
 
 exports.sourceNodes = ({boundActionCreators}, configOptions) => {
     const {createNode} = boundActionCreators;
