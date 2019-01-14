@@ -1,14 +1,21 @@
 # Gatsby Source Ghost
 
-Source plugin for pulling data into Gatsby.js from the [Ghost Public API](https://docs.ghost.org/api/).
+Source plugin for pulling data into [Gatsby.js](https://www.gatsbyjs.org/) from [Ghost](https://ghost.org), using the Ghost [Content API](https://docs.ghost.org/api/content/).
+
+* **Demo:** https://gatsby.ghost.org
+* **Gatsby Starter** https://github.com/TryGhost/gatsby-starter-ghost
+* **Documentation:** https://docs.ghost.org/api/gatsby/
+
 
 ## Install
+
+`yarn add gatsby-source-ghost`
 
 `npm install --save gatsby-source-ghost`
 
 ## How to use
 
-You need to specify three properties in your `gatsby-config.js`:
+Plugin configuration for `gatsby-config.js`:
 
 ```
 {
@@ -21,21 +28,21 @@ You need to specify three properties in your `gatsby-config.js`:
 ```
 
 `apiUrl`
- The admin or API URL for your Ghost site. For Ghost(Pro) customers this is your `.ghost.io` domain. For self hosters it is your main domain unless you have a separate `admin` url configured. Note that this URL should be served over HTTPS.
+ Ghost admin or API URL - for Ghost(Pro) customers this is your `.ghost.io` domain, for self-hosters it's the domain used to access the admin panel. This should be served over https.
 
 `contentApiKey`
 The "Content API Key" copied from the "Integrations" screen in Ghost Admin.
 
+If you want to keep these values private (if your site is not public) you can do so using [environment variables](https://www.gatsbyjs.org/docs/environment-variables/).
 
 ## How to query
 
 There are 5 node types available from Ghost: Post, Page, Author, Tag, and Settings.
 
-Documentation for the full set of fields made available for each resource type can be found in the [Content API docs](https://docs.ghost.org/api/content/).
+Documentation for the full set of fields made available for each resource type can be
+found in the [Content API docs](https://docs.ghost.org/api/content/). Posts and Pages have the same properties.
 
-Posts and Pages have the same properties.
-
-You can query Post nodes created from Ghost like the following:
+**Example Post Query**
 
 ```
 {
@@ -69,6 +76,8 @@ You can query Post nodes created from Ghost like the following:
 }
 ```
 
+**Filter Posts by Tag**
+
 A common but tricky example of filtering posts by tag, can be achieved like this (Gatsby v2+):
 
 ```
@@ -84,59 +93,9 @@ A common but tricky example of filtering posts by tag, can be achieved like this
 }
 ```
 
-You can query Page nodes created from Ghost like the following:
+**Query Settings**
 
-```
-{
-  allGhostPage {
-    edges {
-      node {
-        id
-        slug
-        title
-        html
-        ...
-      }
-    }
-  }
-}
-```
-
-You can query Tag nodes created from Ghost like the following:
-
-```
-{
-  allGhostTag {
-    edges {
-      node {
-        id
-        slug
-        name
-        ...
-      }
-    }
-  }
-}
-```
-
-You can query Author nodes created from Ghost like the following:
-
-```
-{
-  allGhostAuthor {
-    edges {
-      node {
-        id
-        slug
-        name
-        ...
-      }
-    }
-  }
-}
-```
-
-You can query the Settings node created from Ghost like the following:
+The settings node is different as there's only one object, and it has the properties [listed here](https://docs.ghost.org/api/content/#settings).
 
 ```
 {
@@ -146,6 +105,29 @@ You can query the Settings node created from Ghost like the following:
         title
         description
         lang
+        ...
+        navigation {
+            label
+            url
+        }
+      }
+    }
+  }
+}
+```
+
+**Query Other Node Types**
+
+The Post, Page, Author and Tag nodes all work the same. Use the node type you need in this query:
+
+
+```
+{
+  allGhost${NodeType} {
+    edges {
+      node {
+        id
+        slug
         ...
       }
     }
