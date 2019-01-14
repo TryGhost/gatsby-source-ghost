@@ -2,8 +2,9 @@ const Promise = require('bluebird');
 const ContentAPI = require('./content-api');
 const {PostNode, PageNode, TagNode, AuthorNode, SettingsNode} = require('./ghost-nodes');
 
-exports.sourceNodes = ({boundActionCreators}, configOptions) => {
-    const {createNode} = boundActionCreators;
+exports.sourceNodes = ({actions}, configOptions) => {
+    const {createNode} = actions;
+
     const api = ContentAPI.configure(configOptions);
 
     const postAndPageFetchOptions = {

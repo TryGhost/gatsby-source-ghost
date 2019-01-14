@@ -15,7 +15,7 @@ describe('Basic Functionality', function () {
         const createNode = sinon.stub();
 
         gatsbyNode
-            .sourceNodes({boundActionCreators: {createNode}}, {})
+            .sourceNodes({actions: {createNode}}, {})
             .then(() => {
                 createNode.callCount.should.eql(7);
 
