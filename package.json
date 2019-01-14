@@ -1,6 +1,6 @@
 {
   "name": "gatsby-source-ghost",
-  "version": "3.1.1",
+  "version": "3.2.0",
   "description": "Gatsby source plugin for building websites using the Ghost API as a data source.",
   "repository": "git@github.com:TryGhost/gatsby-source-ghost.git",
   "author": "Ghost Foundation",
