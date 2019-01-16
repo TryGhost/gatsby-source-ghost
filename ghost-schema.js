@@ -105,8 +105,8 @@ const settings = {
     twitter: 'tryghost',
     lang: 'en',
     timezone: 'Etc/UTC',
-    ghost_head: '<script></script>',
-    ghost_foot: '<style></style>',
+    codeinjection_head: '<script></script>',
+    codeinjection_foot: '<style></style>',
     navigation: [
         {label: 'Home', url: '/'},
         {label: 'Tag', url: '/tag/getting-started/'},
