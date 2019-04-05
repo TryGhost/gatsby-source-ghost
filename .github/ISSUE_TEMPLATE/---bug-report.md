@@ -32,5 +32,6 @@ Any other info e.g. Why do you consider this to be a bug? What did you expect to
 
 * Ghost Version:
 * Gatsby Version:
+* Gatsby Source Ghost Version:
 * Node Version:
 * OS:
