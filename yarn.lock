@@ -47,10 +47,10 @@
   resolved "https://registry.yarnpkg.com/@sinonjs/text-encoding/-/text-encoding-0.7.1.tgz#8da5c6530915653f3a1f38fd5f101d8c3f8079c5"
   integrity sha512-+iTbntw2IZPb/anVDbypzfQa+ay64MW0Zo8aJ8gZPWMMK6/OubMVb6lUPMagqjOPnmtauXnFCACVl3O7ogjeqQ==
 
-"@tryghost/content-api@1.2.2":
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/@tryghost/content-api/-/content-api-1.2.2.tgz#ff0fc34bb1a519dabbda3641af4e631ec412f426"
-  integrity sha512-kIy1PLRIrnAPidekV51QYHhirqxDGCAfOIs29fmGSvnc6w8uGwxJ12ESS7ErUnz9j/VRonWKIr9+u/d4N7c2hw==
+"@tryghost/content-api@1.2.3":
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/@tryghost/content-api/-/content-api-1.2.3.tgz#196a5f2c4e0192a33c8e4ee2613522e465aee480"
+  integrity sha512-TOlsjgmH202FV2XD2plGxFiQvdhyjCj2HlFaVbYuSvQ7U4eldChbse4FTI3RiF+IsvWQkCsdkUiVikBJfn22cg==
   dependencies:
     axios "0.18.0"
     ghost-ignition "^3.0.0"
