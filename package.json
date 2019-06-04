@@ -28,8 +28,8 @@
     "sinon": "7.3.2"
   },
   "dependencies": {
-    "@tryghost/content-api": "1.2.3",
-    "bluebird": "3.5.4",
+    "@tryghost/content-api": "1.2.4",
+    "bluebird": "3.5.5",
     "gatsby-node-helpers": "^0.3.0",
     "qs": "6.7.0"
   }
