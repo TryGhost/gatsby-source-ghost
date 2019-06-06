@@ -30,6 +30,7 @@
   "dependencies": {
     "@tryghost/content-api": "1.2.4",
     "bluebird": "3.5.5",
+    "cheerio": "0.22.0",
     "gatsby-node-helpers": "^0.3.0",
     "qs": "6.7.0"
   }

@@ -1,6 +1,54 @@
 const Promise = require('bluebird');
 const ContentAPI = require('./content-api');
 const {PostNode, PageNode, TagNode, AuthorNode, SettingsNode, fakeNodes} = require('./ghost-nodes');
+const _ = require(`lodash`);
+const cheerio = require(`cheerio`);
+
+const parseCodeinjection = (html) => {
+    let $ = null;
+
+    try {
+        $ = cheerio.load(html, {decodeEntities: false});
+    } catch (e) {
+        return {};
+    }
+
+    const $parsedStyles = $(`style`);
+    const codeInjObj = {};
+
+    $parsedStyles.each((i, style) => {
+        if (i === 0) {
+            codeInjObj.styles = $(style).html();
+        } else {
+            codeInjObj.styles += $(style).html();
+        }
+    });
+
+    return codeInjObj;
+};
+
+const transformCodeinjection = (posts) => {
+    posts.map((post) => {
+        if (!post.codeinjection_head && !post.codeinjection_foot) {
+            return post;
+        }
+        const allCodeinjections = post.codeinjection_head.concat(post.codeinjection_foot);
+
+        if (allCodeinjections) {
+            const headInjection = parseCodeinjection(allCodeinjections);
+
+            if (_.isEmpty(post.codeinjection_styles)) {
+                post.codeinjection_styles = !_.isEmpty(headInjection.styles) && headInjection.styles;
+            } else {
+                post.codeinjection_styles += !_.isEmpty(headInjection.styles) && headInjection.styles;
+            }
+        }
+
+        return post;
+    });
+
+    return posts;
+};
 
 /**
  * Create Live Ghost Nodes
@@ -19,6 +67,7 @@ const createLiveGhostNodes = ({actions}, configOptions) => {
     };
 
     const fetchPosts = api.posts.browse(postAndPageFetchOptions).then((posts) => {
+        posts = transformCodeinjection(posts);
         posts.forEach(post => createNode(PostNode(post)));
     });
 
@@ -46,6 +95,20 @@ const createLiveGhostNodes = ({actions}, configOptions) => {
     });
 
     const fetchSettings = api.settings.browse().then((setting) => {
+        const codeinjectionHead = setting.codeinjection_head || setting.ghost_head;
+        const codeinjectionFoot = setting.codeinjection_foot || setting.ghost_foot;
+        const allCodeinjections = codeinjectionHead.concat(codeinjectionFoot);
+
+        if (allCodeinjections) {
+            const parsedCodeinjections = parseCodeinjection(allCodeinjections);
+
+            if (_.isEmpty(setting.codeinjection_styles)) {
+                setting.codeinjection_styles = parsedCodeinjections.styles;
+            } else {
+                setting.codeinjection_styles += parsedCodeinjections.styles;
+            }
+        }
+
         // The settings object doesn't have an id, prevent Gatsby from getting 'undefined'
         setting.id = 1;
         createNode(SettingsNode(setting));
