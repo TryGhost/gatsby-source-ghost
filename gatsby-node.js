@@ -38,11 +38,13 @@ const transformCodeinjection = (posts) => {
             const headInjection = parseCodeinjection(allCodeinjections);
 
             if (_.isEmpty(post.codeinjection_styles)) {
-                post.codeinjection_styles = !_.isEmpty(headInjection.styles) && headInjection.styles;
+                post.codeinjection_styles = headInjection.styles;
             } else {
-                post.codeinjection_styles += !_.isEmpty(headInjection.styles) && headInjection.styles;
+                post.codeinjection_styles += headInjection.styles;
             }
         }
+
+        post.codeinjection_styles = _.isNil(post.codeinjection_styles) ? '' : post.codeinjection_styles;
 
         return post;
     });
@@ -109,6 +111,7 @@ const createLiveGhostNodes = ({actions}, configOptions) => {
             }
         }
 
+        setting.codeinjection_styles = _.isNil(setting.codeinjection_styles) ? '' : setting.codeinjection_styles;
         // The settings object doesn't have an id, prevent Gatsby from getting 'undefined'
         setting.id = 1;
         createNode(SettingsNode(setting));
