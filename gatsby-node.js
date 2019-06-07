@@ -99,7 +99,8 @@ const createLiveGhostNodes = ({actions}, configOptions) => {
     const fetchSettings = api.settings.browse().then((setting) => {
         const codeinjectionHead = setting.codeinjection_head || setting.ghost_head;
         const codeinjectionFoot = setting.codeinjection_foot || setting.ghost_foot;
-        const allCodeinjections = codeinjectionHead.concat(codeinjectionFoot);
+        const allCodeinjections = codeinjectionHead ? codeinjectionHead.concat(codeinjectionFoot) :
+            codeinjectionFoot ? codeinjectionFoot : null;
 
         if (allCodeinjections) {
             const parsedCodeinjections = parseCodeinjection(allCodeinjections);
