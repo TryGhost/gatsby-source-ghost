@@ -19,8 +19,8 @@
     "ship": "STATUS=$(git status --porcelain); echo $STATUS; if [ -z \"$STATUS\" ]; then yarn publish && git push --follow-tags; fi"
   },
   "devDependencies": {
-    "eslint": "5.16.0",
-    "eslint-plugin-ghost": "0.2.0",
+    "eslint": "6.0.1",
+    "eslint-plugin-ghost": "0.3.0",
     "lodash": "^4.17.11",
     "mocha": "6.1.4",
     "proxyquire": "^2.1.0",
@@ -28,9 +28,9 @@
     "sinon": "7.3.2"
   },
   "dependencies": {
-    "@tryghost/content-api": "1.2.4",
+    "@tryghost/content-api": "1.2.5",
     "bluebird": "3.5.5",
-    "cheerio": "0.22.0",
+    "cheerio": "1.0.0-rc.3",
     "gatsby-node-helpers": "^0.3.0",
     "qs": "6.7.0"
   }
