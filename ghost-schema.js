@@ -8,7 +8,7 @@ const tag = {
     visibility: 'public',
     meta_title: 'Data schema primary',
     meta_description: 'This is a data schema stub for Gatsby.js and is not used. It must exist for builds to function',
-    count: {posts: 1}
+    postCount: 1
 };
 const author = {
     id: '179e06da7ae846929bb30f19f3e82ecb',
@@ -24,7 +24,7 @@ const author = {
     twitter: '@ghost',
     meta_title: 'Data Schema Author',
     meta_description: 'This is a data schema stub for Gatsby.js and is not used. It must exist for builds to function',
-    count: {posts: 1}
+    postCount: 1
 };
 
 const post = {
