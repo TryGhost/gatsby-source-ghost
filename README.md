@@ -22,7 +22,8 @@ Plugin configuration for `gatsby-config.js`:
    resolve: `gatsby-source-ghost`,
    options: {
        apiUrl: `https://<your-subdomain>.ghost.io`,
-       contentApiKey: `<your content api key>`
+       contentApiKey: `<your content api key>`,
+       version: `v2` // optional, defaults to "v2"
    }
 }
 ```
