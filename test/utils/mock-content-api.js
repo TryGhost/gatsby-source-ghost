@@ -29,7 +29,9 @@ const browseSettings = sinon.stub().resolves(
     {
         title: 'Ghost & Gatsby',
         description: 'Thoughts, stories and ideas.',
-        navigation: [{label: 'Home', url: '/'}]
+        navigation: [{label: 'Home', url: '/'}],
+        codeinjection_head: '<style></style>',
+        codeinjection_foot: '<style><style>'
     }
 );
 const MockContentAPI = function () {

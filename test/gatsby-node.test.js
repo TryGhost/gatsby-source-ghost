@@ -4,12 +4,12 @@ const gatsbyNode = require('../gatsby-node');
 const ghostSchema = require('../ghost-schema');
 
 describe('Basic Functionality', function () {
-    beforeEach(() => {
-        sinon.replace(ContentAPI, 'configure', testUtils.MockContentAPI);
+    beforeEach(function () {
+        return sinon.replace(ContentAPI, 'configure', testUtils.MockContentAPI);
     });
 
-    afterEach(() => {
-        sinon.restore();
+    afterEach(function () {
+        return sinon.restore();
     });
 
     it('Gatsby Node is able to create fake and real nodes', function (done) {
