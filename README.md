@@ -23,7 +23,7 @@ Plugin configuration for `gatsby-config.js`:
    options: {
        apiUrl: `https://<your-subdomain>.ghost.io`,
        contentApiKey: `<your content api key>`,
-       version: `v2` // optional, defaults to "v2"
+       version: `v3` // optional, defaults to "v3"
    }
 }
 ```
