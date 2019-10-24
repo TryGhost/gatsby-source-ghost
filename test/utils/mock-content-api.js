@@ -5,10 +5,14 @@
 
 const browsePosts = sinon.stub().resolves([
     {
-        slug: 'welcome-to-ghost', tags: [
+        slug: 'welcome-to-ghost',
+        /* Adding this line simulates https://github.com/TryGhost/gatsby-source-ghost/issues/17 */
+        codeinjection_foot: '<style></style>',
+        tags: [
             {slug: 'getting-started', id: '1'},
             {slug: 'hash-feature-img', id: '2'}
-        ], authors: [
+        ],
+        authors: [
             {name: 'Ghost Writer', id: '1'},
             {name: 'Ghost Author', id: '2'}
         ]

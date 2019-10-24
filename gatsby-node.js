@@ -29,19 +29,18 @@ const parseCodeinjection = (html) => {
 
 const transformCodeinjection = (posts) => {
     posts.map((post) => {
-        if (!post.codeinjection_head && !post.codeinjection_foot) {
+        const allCodeinjections = [post.codeinjection_head, post.codeinjection_foot].join('');
+
+        if (!allCodeinjections) {
             return post;
         }
-        const allCodeinjections = post.codeinjection_head.concat(post.codeinjection_foot);
 
-        if (allCodeinjections) {
-            const headInjection = parseCodeinjection(allCodeinjections);
+        const headInjection = parseCodeinjection(allCodeinjections);
 
-            if (_.isEmpty(post.codeinjection_styles)) {
-                post.codeinjection_styles = headInjection.styles;
-            } else {
-                post.codeinjection_styles += headInjection.styles;
-            }
+        if (_.isEmpty(post.codeinjection_styles)) {
+            post.codeinjection_styles = headInjection.styles;
+        } else {
+            post.codeinjection_styles += headInjection.styles;
         }
 
         post.codeinjection_styles = _.isNil(post.codeinjection_styles) ? '' : post.codeinjection_styles;
