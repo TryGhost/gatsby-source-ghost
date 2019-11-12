@@ -30,7 +30,7 @@ Plugin configuration for `gatsby-config.js`:
 ```
 
 `apiUrl`
- Ghost admin or API URL - for Ghost(Pro) customers this is your `.ghost.io` domain, for self-hosters it's the domain used to access the admin panel. This should be served over https.
+ Ghost Content API URL - for Ghost(Pro) customers this is your `.ghost.io` domain, it’s the same URL used to view the admin panel, but without the `/ghost` subdirectory. This should be served over https.
 
 `contentApiKey`
 The "Content API Key" copied from the "Integrations" screen in Ghost Admin.
