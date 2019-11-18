@@ -33,6 +33,7 @@ const post = {
     title: 'Data schema',
     slug: 'data-schema',
     url: 'https://demo.ghost.io/data-schema/',
+    canonical_url: 'https://demo.ghost.io/data-schema-page/',
     mobiledoc: '{"version":"0.3.1","atoms":[],"cards":[],"markups":[],"sections":[[1,"p",[[0,[],0,"This is a data schema stub for Gatsby.js and is not used. It must exist for builds to function"]]]]}',
     html: '<p>This is a data schema stub for Gatsby.js and is not used. It must exist for builds to function</p>',
     comment_id: '5bb75b5a37361dae192eff1b',
@@ -59,7 +60,9 @@ const post = {
     primary_author: author,
     primary_tag: tag,
     authors: [author],
-    tags: [tag]
+    tags: [tag],
+    visibility: 'public',
+    reading_time: 1
 };
 const page = {
     id: '5bbafb3cb7ec4135e42fce57',
@@ -67,6 +70,7 @@ const page = {
     title: 'Data schema',
     slug: 'data-schema-page',
     url: 'https://demo.ghost.io/data-schema-page/',
+    canonical_url: 'https://demo.ghost.io/data-schema-page/',
     mobiledoc: '{"version":"0.3.1","atoms":[],"cards":[],"markups":[],"sections":[[1,"p",[[0,[],0,"This is a data schema stub for Gatsby.js and is not used. It must exist for builds to function"]]]]}',
     html: '<p>This is a data schema stub for Gatsby.js and is not used. It must exist for builds to function</p>',
     comment_id: '5bb75b5a37361dae192eff1b',
@@ -94,7 +98,9 @@ const page = {
     primary_author: author,
     primary_tag: tag,
     authors: [author],
-    tags: [tag]
+    tags: [tag],
+    visibility: 'public',
+    reading_time: 1
 };
 
 const settings = {
