@@ -121,6 +121,12 @@ const settings = {
         {label: 'Tag', url: '/tag/getting-started/'},
         {label: 'Author', url: '/author/ghost/'},
         {label: 'Help', url: 'https://help.ghost.org'}
+    ],
+    secondary_navigation: [
+        {label: 'Home', url: '/'},
+        {label: 'Tag', url: '/tag/getting-started/'},
+        {label: 'Author', url: '/author/ghost/'},
+        {label: 'Help', url: 'https://help.ghost.org'}
     ]
 };
 
