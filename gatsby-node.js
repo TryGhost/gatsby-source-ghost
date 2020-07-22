@@ -113,13 +113,13 @@ exports.sourceNodes = ({actions}, configOptions) => {
         .browse(postAndPageFetchOptions)
         .then((posts) => {
             posts = transformCodeinjection(posts);
-            posts.forEach((post) => createNode(PostNode(post)));
+            posts.forEach(post => createNode(PostNode(post)));
         });
 
     const fetchPages = api.pages
         .browse(postAndPageFetchOptions)
         .then((pages) => {
-            pages.forEach((page) => createNode(PageNode(page)));
+            pages.forEach(page => createNode(PageNode(page)));
         });
 
     const tagAndAuthorFetchOptions = {
@@ -154,8 +154,8 @@ exports.sourceNodes = ({actions}, configOptions) => {
         const allCodeinjections = codeinjectionHead
             ? codeinjectionHead.concat(codeinjectionFoot)
             : codeinjectionFoot
-            ? codeinjectionFoot
-            : null;
+                ? codeinjectionFoot
+                : null;
 
         /**
          * If there are any code injections, extract style tags from the markup and

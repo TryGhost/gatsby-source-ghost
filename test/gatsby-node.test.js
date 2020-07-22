@@ -19,7 +19,7 @@ describe('Basic Functionality', function () {
             .then(() => {
                 createNode.callCount.should.eql(7);
 
-                const getFirstArg = (call) => createNode.getCall(call).args[0];
+                const getFirstArg = call => createNode.getCall(call).args[0];
 
                 // Check Real Nodes are created
                 getFirstArg(0).should.be.a.ValidGatsbyNode('GhostPost');
