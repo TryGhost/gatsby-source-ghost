@@ -1,133 +1,157 @@
-const tag = {
-    id: 'a6fd74f5667245d9b678429bc35febbf',
-    name: 'Data schema primary',
-    slug: 'data-schema',
-    url: 'https://demo.ghost.io/tag/data-schema-tag/',
-    description: 'This is a data schema stub for Gatsby.js and is not used. It must exist for builds to function',
-    feature_image: 'https://images.unsplash.com/photo-1532630571098-79a3d222b00d?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjExNzczfQ&s=a88235003c40468403f936719134519d',
-    visibility: 'public',
-    meta_title: 'Data schema primary',
-    meta_description: 'This is a data schema stub for Gatsby.js and is not used. It must exist for builds to function',
-    postCount: 1
-};
-const author = {
-    id: '179e06da7ae846929bb30f19f3e82ecb',
-    name: 'Data Schema Author',
-    slug: 'data-schema-author',
-    url: 'https://demo.ghost.io/author/data-schema-author/',
-    profile_image: 'https://casper.ghost.org/v2.0.0/images/ghost.png',
-    cover_image: 'https://images.unsplash.com/photo-1532630571098-79a3d222b00d?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjExNzczfQ&s=a88235003c40468403f936719134519d',
-    bio: 'This is a data schema stub for Gatsby.js and is not used. It must exist for builds to function',
-    website: 'https://ghost.org',
-    location: 'The Internet',
-    facebook: 'ghost',
-    twitter: '@ghost',
-    meta_title: 'Data Schema Author',
-    meta_description: 'This is a data schema stub for Gatsby.js and is not used. It must exist for builds to function',
-    postCount: 1
-};
+/**
+ * Custom schema with types based on the Ghost V3 API spec.
+ *
+ * Note that GhostPost and GhostPage are identical.
+ *
+ * Foreign Keys are linked by 'slug'.
+ *
+ * `GhostNavigation` and `GhostPostCount` are custom types which do not become nodes.
+ * They instead represent the shape of objects returned by the Ghost API for navigation and post count.
+ */
 
-const post = {
-    id: '5bbafb3cb7ec4135e42fce56',
-    uuid: '472cd89d-953c-42ad-ae18-974b35444d03',
-    title: 'Data schema',
-    slug: 'data-schema',
-    url: 'https://demo.ghost.io/data-schema/',
-    canonical_url: 'https://demo.ghost.io/data-schema-page/',
-    mobiledoc: '{"version":"0.3.1","atoms":[],"cards":[],"markups":[],"sections":[[1,"p",[[0,[],0,"This is a data schema stub for Gatsby.js and is not used. It must exist for builds to function"]]]]}',
-    html: '<p>This is a data schema stub for Gatsby.js and is not used. It must exist for builds to function</p>',
-    comment_id: '5bb75b5a37361dae192eff1b',
-    plaintext: 'This is a data schema stub for Gatsby.js and is not used. It must exist for\nbuilds to function',
-    feature_image: 'https://images.unsplash.com/photo-1532630571098-79a3d222b00d?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjExNzczfQ&s=a88235003c40468403f936719134519d',
-    featured: true,
-    page: false,
-    meta_title: 'Data schema',
-    meta_description: 'This is a data schema stub for Gatsby.js and is not used. It must exist for builds to function',
-    created_at: '2018-12-04T13:59:08.000+00:00',
-    updated_at: '2018-12-04T13:59:08.000+00:00',
-    published_at: '2018-12-04T13:59:14.000+00:00',
-    custom_excerpt: 'This is a data schema stub for Gatsby.js and is not used. It must exist for builds to function',
-    excerpt: 'This is a data schema stub for Gatsby.js and is not used. It must exist for builds to function',
-    codeinjection_head: '<style>.some-class {\n}<style><script>function(){console.log("hello");}</script>',
-    codeinjection_foot: '<style>.some-class {\n}<style><script>function(){console.log("hello");}</script>',
-    codeinjection_styles: '.some-class {\n}',
-    og_image: 'https://images.unsplash.com/photo-1532630571098-79a3d222b00d?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjExNzczfQ&s=a88235003c40468403f936719134519d',
-    og_title: 'Data schema',
-    og_description: 'This is a data schema stub for Gatsby.js and is not used. It must exist for builds to function',
-    twitter_image: 'https://images.unsplash.com/photo-1532630571098-79a3d222b00d?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjExNzczfQ&s=a88235003c40468403f936719134519d',
-    twitter_title: 'Data schema',
-    twitter_description: 'This is a data schema stub for Gatsby.js and is not used. It must exist for builds to function',
-    primary_author: author,
-    primary_tag: tag,
-    authors: [author],
-    tags: [tag],
-    visibility: 'public',
-    reading_time: 1
-};
-const page = {
-    id: '5bbafb3cb7ec4135e42fce57',
-    uuid: '472cd89d-953c-42ad-ae18-974b35444d04',
-    title: 'Data schema',
-    slug: 'data-schema-page',
-    url: 'https://demo.ghost.io/data-schema-page/',
-    canonical_url: 'https://demo.ghost.io/data-schema-page/',
-    mobiledoc: '{"version":"0.3.1","atoms":[],"cards":[],"markups":[],"sections":[[1,"p",[[0,[],0,"This is a data schema stub for Gatsby.js and is not used. It must exist for builds to function"]]]]}',
-    html: '<p>This is a data schema stub for Gatsby.js and is not used. It must exist for builds to function</p>',
-    comment_id: '5bb75b5a37361dae192eff1b',
-    plaintext: 'This is a data schema stub for Gatsby.js and is not used. It must exist for\nbuilds to function',
-    feature_image: 'https://images.unsplash.com/photo-1532630571098-79a3d222b00d?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjExNzczfQ&s=a88235003c40468403f936719134519d',
-    featured: false,
-    page: true,
-    meta_title: 'Data schema',
-    meta_description: 'This is a data schema stub for Gatsby.js and is not used. It must exist for builds to function',
-    created_at: '2018-12-04T13:59:08.000+00:00',
-    updated_at: '2018-12-04T13:59:08.000+00:00',
-    published_at: '2018-12-04T13:59:14.000+00:00',
-    custom_excerpt: 'This is a data schema stub for Gatsby.js and is not used. It must exist for builds to function',
-    excerpt: 'This is a data schema stub for Gatsby.js and is not used. It must exist for builds to function',
-    codeinjection_head: '<style>.some-class {\n}<style><script>function(){console.log("hello");}</script>',
-    codeinjection_foot: '<style>.some-class {\n}<style><script>function(){console.log("hello");}</script>',
-    codeinjection_styles: '.some-class {\n}',
-    og_image: 'https://images.unsplash.com/photo-1532630571098-79a3d222b00d?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjExNzczfQ&s=a88235003c40468403f936719134519d',
-    og_title: 'Data schema',
-    og_description: 'This is a data schema stub for Gatsby.js and is not used. It must exist for builds to function',
-    twitter_image: 'https://images.unsplash.com/photo-1532630571098-79a3d222b00d?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjExNzczfQ&s=a88235003c40468403f936719134519d',
-    twitter_title: 'Data schema',
-    twitter_description: 'This is a data schema stub for Gatsby.js and is not used. It must exist for builds to function',
-    custom_template: 'post.hbs',
-    primary_author: author,
-    primary_tag: tag,
-    authors: [author],
-    tags: [tag],
-    visibility: 'public',
-    reading_time: 1
-};
+const types = `
+type GhostPost implements Node {
+    slug: String!
+    id: ID! 
+    uuid: String!
+    title: String!
+    html: String!
+    comment_id: String!
+    feature_image: String
+    featured: Boolean!
+    visibility: String!
+    created_at: String!
+    updated_at: String!
+    published_at: String!
+    custom_excerpt: String
+    codeinjection_head: String
+    codeinjection_foot: String
+    codeinjection_styles: String
+    custom_template: String
+    canonical_url: String
+    send_email_when_published: Boolean
+    tags: [GhostTag] @link(from: "tags.slug" by: "slug")
+    authors: [GhostAuthor]! @link(from: "authors.slug" by: "slug")
+    primary_author: GhostAuthor! @link(from: "primary_author.slug" by: "slug")
+    primary_tag: GhostTag @link(from: "primary_tag.slug" by: "slug")
+    url: String!
+    excerpt: String!
+    reading_time: Int!
+    og_image: String
+    og_title: String
+    og_description: String
+    twitter_image: String
+    twitter_title: String
+    twitter_description: String
+    meta_title: String
+    meta_description: String
+    email_subject: String
+}
 
-const settings = {
-    title: 'Ghost',
-    description: 'The professional publishing platform',
-    logo: 'https://static.ghost.org/v1.0.0/images/ghost-logo.svg',
-    icon: 'https://static.ghost.org/favicon.ico',
-    cover_image: 'https://static.ghost.org/v1.0.0/images/blog-cover.jpg',
-    facebook: 'ghost',
-    twitter: '@ghost',
-    lang: 'en',
-    timezone: 'Etc/UTC',
-    codeinjection_head: '<script>>some script</script><style></style>',
-    codeinjection_foot: '<style>.some-class {\n}</style><script></script>',
-    codeinjection_styles: '.some-class {\n}',
-    navigation: [
-        {label: 'Home', url: '/'},
-        {label: 'Tag', url: '/tag/getting-started/'},
-        {label: 'Author', url: '/author/ghost/'},
-        {label: 'Help', url: 'https://help.ghost.org'}
-    ]
-};
+type GhostPage implements Node {
+    slug: String!
+    id: ID! 
+    uuid: String!
+    title: String!
+    html: String!
+    comment_id: String!
+    feature_image: String
+    featured: Boolean!
+    visibility: String!
+    created_at: String!
+    updated_at: String!
+    published_at: String!
+    custom_excerpt: String
+    codeinjection_head: String
+    codeinjection_foot: String
+    codeinjection_styles: String
+    custom_template: String
+    canonical_url: String
+    send_email_when_published: Boolean
+    tags: [GhostTag] @link(from: "tags.slug" by: "slug")
+    authors: [GhostAuthor]! @link(from: "authors.slug" by: "slug")
+    primary_author: GhostAuthor! @link(from: "primary_author.slug" by: "slug")
+    primary_tag: GhostTag @link(from: "primary_tag.slug" by: "slug")
+    url: String!
+    excerpt: String!
+    reading_time: Int!
+    og_image: String
+    og_title: String
+    og_description: String
+    twitter_image: String
+    twitter_title: String
+    twitter_description: String
+    meta_title: String
+    meta_description: String
+    email_subject: String
+}
 
-module.exports = {
-    post,
-    page,
-    tag,
-    author,
-    settings
-};
+type GhostTag implements Node {
+    slug: String!
+    id: ID! 
+    name: String!
+    description: String
+    feature_image: String
+    visibility: String!
+    meta_title: String
+    meta_description: String
+    url: String!
+    count: GhostPostCount
+    postCount: Int
+}
+
+type GhostAuthor implements Node {
+    slug: String!
+    id: ID!
+    name: String!
+    profile_image: String
+    cover_image: String
+    bio: String
+    website: String
+    location: String
+    facebook: String
+    twitter: String
+    meta_title: String
+    meta_description: String
+    url: String!
+    count: GhostPostCount!
+    postCount: Int!
+}
+
+type GhostSettings implements Node {
+    title: String
+    description: String
+    logo: String
+    icon: String
+    cover_image: String
+    facebook: String
+    twitter: String
+    lang: String!
+    timezone: String!
+    navigation: [GhostNavigation]
+    secondary_navigation: [GhostNavigation]
+    meta_title: String
+    meta_description: String
+    og_image: String
+    og_title: String
+    og_description: String
+    twitter_image: String
+    twitter_title: String
+    twitter_description: String
+    url: String!
+    codeinjection_head: String
+    codeinjection_foot: String
+    codeinjection_styles: String
+}
+
+type GhostNavigation {
+    label: String!
+    url: String!
+}
+
+type GhostPostCount {
+    posts: Int
+}
+`;
+
+module.exports = types;
