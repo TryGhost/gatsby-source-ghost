@@ -73,10 +73,10 @@
   resolved "https://registry.yarnpkg.com/@sinonjs/text-encoding/-/text-encoding-0.7.1.tgz#8da5c6530915653f3a1f38fd5f101d8c3f8079c5"
   integrity sha512-+iTbntw2IZPb/anVDbypzfQa+ay64MW0Zo8aJ8gZPWMMK6/OubMVb6lUPMagqjOPnmtauXnFCACVl3O7ogjeqQ==
 
-"@tryghost/content-api@1.4.3":
-  version "1.4.3"
-  resolved "https://registry.yarnpkg.com/@tryghost/content-api/-/content-api-1.4.3.tgz#c7bf71dac3379db5ad8dd8bfbb6022a0292fcf54"
-  integrity sha512-7hcwF4jjmQYXXu/SfMZ7271noWVi+mi35QCVwr6uJpsTbbPBNMEQ//ryYAo11yqYhTlkltHTHTWXB1MIbsuF2A==
+"@tryghost/content-api@1.4.4":
+  version "1.4.4"
+  resolved "https://registry.yarnpkg.com/@tryghost/content-api/-/content-api-1.4.4.tgz#ae52a86e694edbe50a7460693f4b7fff619d6174"
+  integrity sha512-5q/M/fcE9OwPHKM+DQUrrjQD7CaNShBxtI/3/aBrcbQPX/aIL2FjbFA5pi3KJ/oe2f0IFlUPGeM1IGuXWsIV4Q==
   dependencies:
     axios "0.19.2"
 
