@@ -20,9 +20,9 @@ type GhostPost implements Node {
     feature_image: String
     featured: Boolean!
     visibility: String!
-    created_at: String!
-    updated_at: String!
-    published_at: String!
+    created_at: Date! @dateformat
+    updated_at: Date! @dateformat
+    published_at: Date! @dateformat
     custom_excerpt: String
     codeinjection_head: String
     codeinjection_foot: String
@@ -37,6 +37,9 @@ type GhostPost implements Node {
     url: String!
     excerpt: String!
     reading_time: Int!
+    email_subject: String
+    plaintext: String
+    page: Boolean
     og_image: String
     og_title: String
     og_description: String
@@ -58,9 +61,9 @@ type GhostPage implements Node {
     feature_image: String
     featured: Boolean!
     visibility: String!
-    created_at: String!
-    updated_at: String!
-    published_at: String!
+    created_at: Date! @dateformat
+    updated_at: Date! @dateformat
+    published_at: Date! @dateformat
     custom_excerpt: String
     codeinjection_head: String
     codeinjection_foot: String
@@ -75,6 +78,9 @@ type GhostPage implements Node {
     url: String!
     excerpt: String!
     reading_time: Int!
+    email_subject: String
+    plaintext: String
+    page: Boolean
     og_image: String
     og_title: String
     og_description: String
@@ -141,7 +147,7 @@ type GhostSettings implements Node {
     url: String!
     codeinjection_head: String
     codeinjection_foot: String
-    codeinjection_styles: String
+    codeinjection_styles: String!
 }
 
 type GhostNavigation {

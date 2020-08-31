@@ -171,6 +171,14 @@ exports.sourceNodes = ({actions}, configOptions) => {
             }
         }
 
+        /**
+         * Ensure always non-null by setting `codeinjection_styles` to
+         * an empty string instead of null.
+         */
+        setting.codeinjection_styles = _.isNil(setting.codeinjection_styles)
+            ? ''
+            : setting.codeinjection_styles;
+
         // The settings object doesn't have an id, prevent Gatsby from getting 'undefined'
         setting.id = 1;
         createNode(SettingsNode(setting));
