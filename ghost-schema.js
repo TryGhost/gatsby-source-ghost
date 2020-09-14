@@ -127,7 +127,8 @@ const settings = {
         {label: 'Tag', url: '/tag/getting-started/'},
         {label: 'Author', url: '/author/ghost/'},
         {label: 'Help', url: 'https://help.ghost.org'}
-    ]
+    ],
+    url: 'https://demo.ghost.io/'
 };
 
 module.exports = {
