@@ -8,7 +8,17 @@ const tag = {
     visibility: 'public',
     meta_title: 'Data schema primary',
     meta_description: 'This is a data schema stub for Gatsby.js and is not used. It must exist for builds to function',
-    postCount: 1
+    postCount: 1,
+    og_image: 'https://images.unsplash.com/photo-1532630571098-79a3d222b00d?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjExNzczfQ&s=a88235003c40468403f936719134519d',
+    og_title: 'Data schema primary',
+    og_description: 'This is a data schema stub for Gatsby.js and is not used. It must exist for builds to function',
+    twitter_image: 'https://images.unsplash.com/photo-1532630571098-79a3d222b00d?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjExNzczfQ&s=a88235003c40468403f936719134519d',
+    twitter_title: 'Data schema primary',
+    twitter_description: 'This is a data schema stub for Gatsby.js and is not used. It must exist for builds to function',
+    codeinjection_head: null,
+    codeinjection_foot: null,
+    canonical_url: 'https://demo.ghost.io/tag/data-schema-tag/',
+    accent_color: '#ffffff'
 };
 const author = {
     id: '179e06da7ae846929bb30f19f3e82ecb',
@@ -26,6 +36,13 @@ const author = {
     meta_description: 'This is a data schema stub for Gatsby.js and is not used. It must exist for builds to function',
     postCount: 1
 };
+
+const navigation = [
+    {label: 'Home', url: '/'},
+    {label: 'Tag', url: '/tag/getting-started/'},
+    {label: 'Author', url: '/author/ghost/'},
+    {label: 'Help', url: 'https://help.ghost.org'}
+];
 
 const post = {
     id: '5bbafb3cb7ec4135e42fce56',
@@ -116,18 +133,8 @@ const settings = {
     codeinjection_head: '<script>>some script</script><style></style>',
     codeinjection_foot: '<style>.some-class {\n}</style><script></script>',
     codeinjection_styles: '.some-class {\n}',
-    navigation: [
-        {label: 'Home', url: '/'},
-        {label: 'Tag', url: '/tag/getting-started/'},
-        {label: 'Author', url: '/author/ghost/'},
-        {label: 'Help', url: 'https://help.ghost.org'}
-    ],
-    secondary_navigation: [
-        {label: 'Home', url: '/'},
-        {label: 'Tag', url: '/tag/getting-started/'},
-        {label: 'Author', url: '/author/ghost/'},
-        {label: 'Help', url: 'https://help.ghost.org'}
-    ],
+    navigation: navigation,
+    secondary_navigation: navigation,
     meta_title: 'Data schema',
     meta_description: 'This is a data schema stub for Gatsby.js and is not used. It must exist for builds to function',
     og_image: 'https://images.unsplash.com/photo-1532630571098-79a3d222b00d?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjExNzczfQ&s=a88235003c40468403f936719134519d',
@@ -137,7 +144,9 @@ const settings = {
     twitter_title: 'Data schema',
     twitter_description: 'This is a data schema stub for Gatsby.js and is not used. It must exist for builds to function',
     members_support_address: 'noreply@demo.ghost.io',
-    url: 'https://demo.ghost.io/'
+    url: 'https://demo.ghost.io/',
+    active_timezone: 'Etc/UTC',
+    default_locale: 'en'
 };
 
 module.exports = {
