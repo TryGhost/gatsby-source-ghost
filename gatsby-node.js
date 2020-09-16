@@ -61,6 +61,12 @@ const createLiveGhostNodes = ({actions}, configOptions) => {
 
     const api = ContentAPI.configure(configOptions);
 
+    const ignoreNotFoundElseRethrow = (err) => {
+        if (err.response.status !== 404) {
+            throw err;
+        }
+    };
+
     const postAndPageFetchOptions = {
         limit: 'all',
         include: 'tags,authors',
@@ -70,11 +76,11 @@ const createLiveGhostNodes = ({actions}, configOptions) => {
     const fetchPosts = api.posts.browse(postAndPageFetchOptions).then((posts) => {
         posts = transformCodeinjection(posts);
         posts.forEach(post => createNode(PostNode(post)));
-    });
+    }).catch(ignoreNotFoundElseRethrow);
 
     const fetchPages = api.pages.browse(postAndPageFetchOptions).then((pages) => {
         pages.forEach(page => createNode(PageNode(page)));
-    });
+    }).catch(ignoreNotFoundElseRethrow);
 
     const tagAndAuthorFetchOptions = {
         limit: 'all',
@@ -86,14 +92,14 @@ const createLiveGhostNodes = ({actions}, configOptions) => {
             tag.postCount = tag.count.posts;
             createNode(TagNode(tag));
         });
-    });
+    }).catch(ignoreNotFoundElseRethrow);
 
     const fetchAuthors = api.authors.browse(tagAndAuthorFetchOptions).then((authors) => {
         authors.forEach((author) => {
             author.postCount = author.count.posts;
             createNode(AuthorNode(author));
         });
-    });
+    }).catch(ignoreNotFoundElseRethrow);
 
     const fetchSettings = api.settings.browse().then((setting) => {
         const codeinjectionHead = setting.codeinjection_head || setting.ghost_head;
@@ -115,7 +121,7 @@ const createLiveGhostNodes = ({actions}, configOptions) => {
         // The settings object doesn't have an id, prevent Gatsby from getting 'undefined'
         setting.id = 1;
         createNode(SettingsNode(setting));
-    });
+    }).catch(ignoreNotFoundElseRethrow);
 
     return Promise.all([fetchPosts, fetchPages, fetchTags, fetchAuthors, fetchSettings]);
 };
