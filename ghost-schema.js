@@ -104,6 +104,16 @@ type GhostTag implements Node {
     url: String!
     count: GhostPostCount
     postCount: Int
+    og_image: String
+    og_title: String
+    og_description: String
+    twitter_image: String
+    twitter_title: String
+    twitter_description: String
+    codeinjection_head: String
+    codeinjection_foot: String
+    canonical_url: String
+    accent_color: String
 }
 
 type GhostAuthor implements Node {
@@ -148,6 +158,8 @@ type GhostSettings implements Node {
     codeinjection_head: String
     codeinjection_foot: String
     codeinjection_styles: String!
+    active_timezone: String
+    default_locale: String
 }
 
 type GhostNavigation {
