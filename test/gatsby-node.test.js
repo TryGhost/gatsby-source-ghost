@@ -11,7 +11,7 @@ describe('Basic Functionality', function () {
         return sinon.restore();
     });
 
-    it('Gatsby Node is able to create fake and real nodes', function (done) {
+    it('Gatsby Node is able to create real nodes', function (done) {
         const createNode = sinon.stub();
 
         gatsbyNode
