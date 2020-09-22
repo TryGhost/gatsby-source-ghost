@@ -1,21 +1,56 @@
+/****
+ * gatsby-node.js
+ *
+ * Generate Gatsby nodes based on a custom schema derived from the Ghost V3 API spec.
+ *
+ * This source plugin will source and generate Posts, Pages, Tags, Authors and Settings.
+ *
+ * https://ghost.org/docs/api/v3/
+ */
+
 const Promise = require('bluebird');
 const ContentAPI = require('./content-api');
-const {PostNode, PageNode, TagNode, AuthorNode, SettingsNode, fakeNodes} = require('./ghost-nodes');
+const {
+    PostNode,
+    PageNode,
+    TagNode,
+    AuthorNode,
+    SettingsNode
+} = require('./ghost-nodes');
 const _ = require(`lodash`);
 const cheerio = require(`cheerio`);
 
+/**
+ * Import all custom ghost types.
+ */
+const ghostTypes = require('./ghost-schema');
+
+/**
+ * Extract specific tags from html and return them in a new object.
+ *
+ * Only style tags are extracted at present.
+ */
 const parseCodeinjection = (html) => {
     let $ = null;
 
+    /**
+     * Attempt to load the HTML into cheerio. Do not escape the HTML.
+     */
     try {
         $ = cheerio.load(html, {decodeEntities: false});
     } catch (e) {
         return {};
     }
 
+    /**
+     * Extract all style tags from the markup.
+     */
     const $parsedStyles = $(`style`);
     const codeInjObj = {};
 
+    /**
+     * For each extracted tag, add or append the tag's HTML to the new object.
+     */
     $parsedStyles.each((i, style) => {
         if (i === 0) {
             codeInjObj.styles = $(style).html();
@@ -27,9 +62,18 @@ const parseCodeinjection = (html) => {
     return codeInjObj;
 };
 
+/**
+ * Extracts specific tags from the code injection header and footer and
+ * transforms posts to include extracted tags as a new key and value in the post object.
+ *
+ * Only the `codeinjection_styles` key is added at present.
+ */
 const transformCodeinjection = (posts) => {
     posts.map((post) => {
-        const allCodeinjections = [post.codeinjection_head, post.codeinjection_foot].join('');
+        const allCodeinjections = [
+            post.codeinjection_head,
+            post.codeinjection_foot
+        ].join('');
 
         if (!allCodeinjections) {
             return post;
@@ -43,8 +87,6 @@ const transformCodeinjection = (posts) => {
             post.codeinjection_styles += headInjection.styles;
         }
 
-        post.codeinjection_styles = _.isNil(post.codeinjection_styles) ? '' : post.codeinjection_styles;
-
         return post;
     });
 
@@ -56,7 +98,7 @@ const transformCodeinjection = (posts) => {
  * Uses the Ghost Content API to fetch all posts, pages, tags, authors and settings
  * Creates nodes for each record, so that they are all available to Gatsby
  */
-const createLiveGhostNodes = ({actions}, configOptions) => {
+exports.sourceNodes = ({actions}, configOptions) => {
     const {createNode} = actions;
 
     const api = ContentAPI.configure(configOptions);
@@ -67,14 +109,18 @@ const createLiveGhostNodes = ({actions}, configOptions) => {
         formats: 'html,plaintext'
     };
 
-    const fetchPosts = api.posts.browse(postAndPageFetchOptions).then((posts) => {
-        posts = transformCodeinjection(posts);
-        posts.forEach(post => createNode(PostNode(post)));
-    });
+    const fetchPosts = api.posts
+        .browse(postAndPageFetchOptions)
+        .then((posts) => {
+            posts = transformCodeinjection(posts);
+            posts.forEach(post => createNode(PostNode(post)));
+        });
 
-    const fetchPages = api.pages.browse(postAndPageFetchOptions).then((pages) => {
-        pages.forEach(page => createNode(PageNode(page)));
-    });
+    const fetchPages = api.pages
+        .browse(postAndPageFetchOptions)
+        .then((pages) => {
+            pages.forEach(page => createNode(PageNode(page)));
+        });
 
     const tagAndAuthorFetchOptions = {
         limit: 'all',
@@ -88,19 +134,33 @@ const createLiveGhostNodes = ({actions}, configOptions) => {
         });
     });
 
-    const fetchAuthors = api.authors.browse(tagAndAuthorFetchOptions).then((authors) => {
-        authors.forEach((author) => {
-            author.postCount = author.count.posts;
-            createNode(AuthorNode(author));
+    const fetchAuthors = api.authors
+        .browse(tagAndAuthorFetchOptions)
+        .then((authors) => {
+            authors.forEach((author) => {
+                author.postCount = author.count.posts;
+                createNode(AuthorNode(author));
+            });
         });
-    });
 
     const fetchSettings = api.settings.browse().then((setting) => {
-        const codeinjectionHead = setting.codeinjection_head || setting.ghost_head;
-        const codeinjectionFoot = setting.codeinjection_foot || setting.ghost_foot;
-        const allCodeinjections = codeinjectionHead ? codeinjectionHead.concat(codeinjectionFoot) :
-            codeinjectionFoot ? codeinjectionFoot : null;
+        /**
+         * Assert the presence of any code injections, from both the use and ghost.
+         */
+        const codeinjectionHead =
+            setting.codeinjection_head || setting.ghost_head;
+        const codeinjectionFoot =
+            setting.codeinjection_foot || setting.ghost_foot;
+        const allCodeinjections = codeinjectionHead
+            ? codeinjectionHead.concat(codeinjectionFoot)
+            : codeinjectionFoot
+                ? codeinjectionFoot
+                : null;
 
+        /**
+         * If there are any code injections, extract style tags from the markup and
+         * transform the setting object to include the `codeinjection_styles` key with the value of those style tags.
+         */
         if (allCodeinjections) {
             const parsedCodeinjections = parseCodeinjection(allCodeinjections);
 
@@ -111,51 +171,34 @@ const createLiveGhostNodes = ({actions}, configOptions) => {
             }
         }
 
-        setting.codeinjection_styles = _.isNil(setting.codeinjection_styles) ? '' : setting.codeinjection_styles;
+        /**
+         * Ensure always non-null by setting `codeinjection_styles` to
+         * an empty string instead of null.
+         */
+        setting.codeinjection_styles = _.isNil(setting.codeinjection_styles)
+            ? ''
+            : setting.codeinjection_styles;
+
         // The settings object doesn't have an id, prevent Gatsby from getting 'undefined'
         setting.id = 1;
         createNode(SettingsNode(setting));
     });
 
-    return Promise.all([fetchPosts, fetchPages, fetchTags, fetchAuthors, fetchSettings]);
+    return Promise.all([
+        fetchPosts,
+        fetchPages,
+        fetchTags,
+        fetchAuthors,
+        fetchSettings
+    ]);
 };
 
 /**
- * Create Temporary Fake Nodes
- * Refs: https://github.com/gatsbyjs/gatsby/issues/10856#issuecomment-451701011
- * Ensures that Gatsby knows about every field in the Ghost schema
+ * Creates custom types based on the Ghost V3 API.
+ *
+ * This creates a fully custom schema, removing the need for dummy content or fake nodes.
  */
-const createTemporaryFakeNodes = ({emitter, actions}) => {
-    // Setup our temporary fake nodes
-    fakeNodes.forEach((node) => {
-        // createTemporaryFakeNodes is called twice. The second time, the node already has an owner
-        // This triggers an error, so we clean the node before trying again
-        delete node.internal.owner;
-        actions.createNode(node);
-    });
-
-    const onSchemaUpdate = () => {
-        // Destroy our temporary fake nodes
-        fakeNodes.forEach((node) => {
-            actions.deleteNode({node});
-        });
-        emitter.off(`SET_SCHEMA`, onSchemaUpdate);
-    };
-
-    // Use a Gatsby internal API to cleanup our Fake Nodes
-    emitter.on(`SET_SCHEMA`, onSchemaUpdate);
-};
-
-// Standard way to create nodes
-exports.sourceNodes = ({emitter, actions}, configOptions) => {
-    // These temporary nodes ensure that Gatsby knows about every field in the Ghost Schema
-    createTemporaryFakeNodes({emitter, actions});
-
-    // Go and fetch live data, and populate the nodes
-    return createLiveGhostNodes({actions}, configOptions);
-};
-
-// Secondary point in build where we have to create fake Nodes
-exports.onPreExtractQueries = ({emitter, actions}) => {
-    createTemporaryFakeNodes({emitter, actions});
+exports.createSchemaCustomization = ({actions}) => {
+    const {createTypes} = actions;
+    createTypes(ghostTypes);
 };

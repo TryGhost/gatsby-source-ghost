@@ -1,9 +1,6 @@
 const createNodeHelpers = require('gatsby-node-helpers').default;
-const schema = require('./ghost-schema');
 
-const {
-    createNodeFactory
-} = createNodeHelpers({
+const {createNodeFactory} = createNodeHelpers({
     typePrefix: 'Ghost'
 });
 
@@ -19,19 +16,10 @@ const TagNode = createNodeFactory(TAG);
 const AuthorNode = createNodeFactory(AUTHOR);
 const SettingsNode = createNodeFactory(SETTINGS);
 
-const fakeNodes = [
-    PostNode(schema.post),
-    PageNode(schema.page),
-    TagNode(schema.tag),
-    AuthorNode(schema.author),
-    SettingsNode(schema.settings)
-];
-
 module.exports = {
     PostNode,
     PageNode,
     TagNode,
     AuthorNode,
-    SettingsNode,
-    fakeNodes
+    SettingsNode
 };
