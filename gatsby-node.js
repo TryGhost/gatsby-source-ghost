@@ -103,6 +103,12 @@ exports.sourceNodes = ({actions}, configOptions) => {
 
     const api = ContentAPI.configure(configOptions);
 
+    const ignoreNotFoundElseRethrow = (err) => {
+        if (err.response.status !== 404) {
+            throw err;
+        }
+    };
+
     const postAndPageFetchOptions = {
         limit: 'all',
         include: 'tags,authors',
@@ -114,25 +120,27 @@ exports.sourceNodes = ({actions}, configOptions) => {
         .then((posts) => {
             posts = transformCodeinjection(posts);
             posts.forEach(post => createNode(PostNode(post)));
-        });
+        }).catch(ignoreNotFoundElseRethrow);
 
     const fetchPages = api.pages
         .browse(postAndPageFetchOptions)
         .then((pages) => {
             pages.forEach(page => createNode(PageNode(page)));
-        });
+        }).catch(ignoreNotFoundElseRethrow);
 
     const tagAndAuthorFetchOptions = {
         limit: 'all',
         include: 'count.posts'
     };
 
-    const fetchTags = api.tags.browse(tagAndAuthorFetchOptions).then((tags) => {
-        tags.forEach((tag) => {
-            tag.postCount = tag.count.posts;
-            createNode(TagNode(tag));
-        });
-    });
+    const fetchTags = api.tags
+        .browse(tagAndAuthorFetchOptions)
+        .then((tags) => {
+            tags.forEach((tag) => {
+                tag.postCount = tag.count.posts;
+                createNode(TagNode(tag));
+            });
+        }).catch(ignoreNotFoundElseRethrow);
 
     const fetchAuthors = api.authors
         .browse(tagAndAuthorFetchOptions)
@@ -141,7 +149,7 @@ exports.sourceNodes = ({actions}, configOptions) => {
                 author.postCount = author.count.posts;
                 createNode(AuthorNode(author));
             });
-        });
+        }).catch(ignoreNotFoundElseRethrow);
 
     const fetchSettings = api.settings.browse().then((setting) => {
         /**
@@ -182,7 +190,7 @@ exports.sourceNodes = ({actions}, configOptions) => {
         // The settings object doesn't have an id, prevent Gatsby from getting 'undefined'
         setting.id = 1;
         createNode(SettingsNode(setting));
-    });
+    }).catch(ignoreNotFoundElseRethrow);
 
     return Promise.all([
         fetchPosts,
