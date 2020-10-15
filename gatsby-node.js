@@ -104,7 +104,7 @@ exports.sourceNodes = ({actions}, configOptions) => {
     const api = ContentAPI.configure(configOptions);
 
     const ignoreNotFoundElseRethrow = (err) => {
-        if (err.response.status !== 404) {
+        if (err && err.response && err.response.status !== 404) {
             throw err;
         }
     };
