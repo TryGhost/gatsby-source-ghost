@@ -12,17 +12,17 @@
 const types = `
 type GhostPost implements Node {
     slug: String!
-    id: ID! 
+    id: ID!
     uuid: String!
     title: String!
-    html: String!
-    comment_id: String!
+    html: String
+    comment_id: String
     feature_image: String
     featured: Boolean!
     visibility: String!
     created_at: Date! @dateformat
-    updated_at: Date! @dateformat
-    published_at: Date! @dateformat
+    updated_at: Date @dateformat
+    published_at: Date @dateformat
     custom_excerpt: String
     codeinjection_head: String
     codeinjection_foot: String
@@ -35,8 +35,8 @@ type GhostPost implements Node {
     primary_author: GhostAuthor! @link(from: "primary_author.slug" by: "slug")
     primary_tag: GhostTag @link(from: "primary_tag.slug" by: "slug")
     url: String!
-    excerpt: String!
-    reading_time: Int!
+    excerpt: String
+    reading_time: Int
     email_subject: String
     plaintext: String
     page: Boolean
@@ -53,17 +53,17 @@ type GhostPost implements Node {
 
 type GhostPage implements Node {
     slug: String!
-    id: ID! 
+    id: ID!
     uuid: String!
     title: String!
-    html: String!
-    comment_id: String!
+    html: String
+    comment_id: String
     feature_image: String
     featured: Boolean!
     visibility: String!
     created_at: Date! @dateformat
-    updated_at: Date! @dateformat
-    published_at: Date! @dateformat
+    updated_at: Date @dateformat
+    published_at: Date @dateformat
     custom_excerpt: String
     codeinjection_head: String
     codeinjection_foot: String
@@ -76,8 +76,8 @@ type GhostPage implements Node {
     primary_author: GhostAuthor! @link(from: "primary_author.slug" by: "slug")
     primary_tag: GhostTag @link(from: "primary_tag.slug" by: "slug")
     url: String!
-    excerpt: String!
-    reading_time: Int!
+    excerpt: String
+    reading_time: Int
     email_subject: String
     plaintext: String
     page: Boolean
@@ -94,7 +94,7 @@ type GhostPage implements Node {
 
 type GhostTag implements Node {
     slug: String!
-    id: ID! 
+    id: ID!
     name: String!
     description: String
     feature_image: String
