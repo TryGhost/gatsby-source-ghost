@@ -72,12 +72,12 @@
   resolved "https://registry.yarnpkg.com/@sinonjs/text-encoding/-/text-encoding-0.7.1.tgz#8da5c6530915653f3a1f38fd5f101d8c3f8079c5"
   integrity sha512-+iTbntw2IZPb/anVDbypzfQa+ay64MW0Zo8aJ8gZPWMMK6/OubMVb6lUPMagqjOPnmtauXnFCACVl3O7ogjeqQ==
 
-"@tryghost/content-api@1.4.11":
-  version "1.4.11"
-  resolved "https://registry.yarnpkg.com/@tryghost/content-api/-/content-api-1.4.11.tgz#1b04d586a7cdad6dbcf273414478f0011fab776f"
-  integrity sha512-TpJ0LJPfHCC8nOzcGq8vEgzL2/YDT4KBEUCb6+KmkX+LEdxbFb7TZDFtMUt32U9Hd3JGasjNwlmlBfxYqgkvmQ==
+"@tryghost/content-api@1.4.12":
+  version "1.4.12"
+  resolved "https://registry.yarnpkg.com/@tryghost/content-api/-/content-api-1.4.12.tgz#328a61e3748640c5c4ff71ea1cd77d99807f39de"
+  integrity sha512-g7g9g4nS9/ulASX7pxzUwZiVT7Ir9f22p1T61qq+gIdlqBAxm4owUyxih7MBJ9mr9MUzsd2gjBoovIN/4mBSZA==
   dependencies:
-    axios "0.21.0"
+    axios "0.21.1"
 
 "@types/color-name@^1.1.1":
   version "1.1.1"
@@ -188,10 +188,10 @@ astral-regex@^2.0.0:
   resolved "https://registry.yarnpkg.com/astral-regex/-/astral-regex-2.0.0.tgz#483143c567aeed4785759c0865786dc77d7d2e31"
   integrity sha512-Z7tMw1ytTXt5jqMcOP+OQteU1VuNK9Y02uuJtKQ1Sv69jXQKKg5cibLwGJow8yzZP+eAc18EmLGPal0bp36rvQ==
 
-axios@0.21.0:
-  version "0.21.0"
-  resolved "https://registry.yarnpkg.com/axios/-/axios-0.21.0.tgz#26df088803a2350dff2c27f96fef99fe49442aca"
-  integrity sha512-fmkJBknJKoZwem3/IKSSLpkdNXZeBu5Q7GA/aRsr2btgrptmSCxi2oFjZHqGdK9DoTil9PIHlPIZw2EcRJXRvw==
+axios@0.21.1:
+  version "0.21.1"
+  resolved "https://registry.yarnpkg.com/axios/-/axios-0.21.1.tgz#22563481962f4d6bde9a76d516ef0e5d3c09b2b8"
+  integrity sha512-dKQiRHxGD9PPRIUNIWvZhPTPpl1rf/OxTYKsqKUDjBwYylTvV7SjSHJb9ratfyzM6wCdLCOYLzs73qpg5c4iGA==
   dependencies:
     follow-redirects "^1.10.0"
 
