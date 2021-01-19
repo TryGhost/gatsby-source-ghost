@@ -30,7 +30,7 @@
     "@tryghost/content-api": "1.4.13",
     "bluebird": "3.7.2",
     "cheerio": "1.0.0-rc.5",
-    "gatsby-node-helpers": "0.3.0",
+    "gatsby-node-helpers": "1.0.3",
     "qs": "6.9.6"
   }
 }
