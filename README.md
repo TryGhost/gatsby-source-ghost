@@ -141,4 +141,4 @@ The Post, Page, Author and Tag nodes all work the same. Use the node type you ne
 
 # Copyright & License
 
-Copyright (c) 2013-2020 Ghost Foundation - Released under the [MIT license](LICENSE).
+Copyright (c) 2013-2021 Ghost Foundation - Released under the [MIT license](LICENSE).
