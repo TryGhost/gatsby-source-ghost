@@ -27,7 +27,7 @@
     "sinon": "10.0.0"
   },
   "dependencies": {
-    "@tryghost/content-api": "1.5.1",
+    "@tryghost/content-api": "1.5.2",
     "bluebird": "3.7.2",
     "cheerio": "1.0.0-rc.5",
     "gatsby-node-helpers": "0.3.0",
