@@ -100,8 +100,9 @@ const transformCodeinjection = (posts) => {
  */
 exports.sourceNodes = ({actions}, configOptions) => {
     const {createNode} = actions;
+    const {apiUrl, contentApiKey, version, postAndPageFetchCustomOptions = {}} = configOptions;
 
-    const api = ContentAPI.configure(configOptions);
+    const api = ContentAPI.configure({apiUrl, contentApiKey, version});
 
     const ignoreNotFoundElseRethrow = (err) => {
         if (err && err.response && err.response.status !== 404) {
@@ -112,7 +113,8 @@ exports.sourceNodes = ({actions}, configOptions) => {
     const postAndPageFetchOptions = {
         limit: 'all',
         include: 'tags,authors',
-        formats: 'html,plaintext'
+        formats: 'html,plaintext',
+        ...postAndPageFetchCustomOptions
     };
 
     const fetchPosts = api.posts
