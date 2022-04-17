@@ -1,5 +1,5 @@
 /**
- * Custom schema with types based on the Ghost V3 API spec.
+ * Custom schema with types based on the Ghost V4 API spec.
  *
  * Note that GhostPost and GhostPage are identical.
  *
@@ -18,6 +18,8 @@ type GhostPost implements Node {
     html: String
     comment_id: String
     feature_image: String
+    feature_image_caption: String
+    feature_image_alt: String
     featured: Boolean!
     visibility: String!
     created_at: Date! @dateformat
@@ -59,6 +61,8 @@ type GhostPage implements Node {
     html: String
     comment_id: String
     feature_image: String
+    feature_image_caption: String
+    feature_image_alt: String
     featured: Boolean!
     visibility: String!
     created_at: Date! @dateformat
