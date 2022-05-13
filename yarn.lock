@@ -90,10 +90,10 @@
   resolved "https://registry.yarnpkg.com/@sinonjs/text-encoding/-/text-encoding-0.7.1.tgz#8da5c6530915653f3a1f38fd5f101d8c3f8079c5"
   integrity sha512-+iTbntw2IZPb/anVDbypzfQa+ay64MW0Zo8aJ8gZPWMMK6/OubMVb6lUPMagqjOPnmtauXnFCACVl3O7ogjeqQ==
 
-"@tryghost/content-api@1.9.5":
-  version "1.9.5"
-  resolved "https://registry.yarnpkg.com/@tryghost/content-api/-/content-api-1.9.5.tgz#af856eaf8b03d0af597d9aa8e17ed33514397392"
-  integrity sha512-rIovkOw1eqt9NZeAGEceYc737qpelj762EC+TCgXmniqNactOcnSxgbK7ksEegJA/ZAEK49nBiIRINoTxQAyOA==
+"@tryghost/content-api@1.9.6":
+  version "1.9.6"
+  resolved "https://registry.yarnpkg.com/@tryghost/content-api/-/content-api-1.9.6.tgz#96beccf63d0229ef07c0f007ce1eb1ab9bf9da7b"
+  integrity sha512-r6rYZOn39qMh+3/sjnd6TsAjQK8cKIARDfUovvcR2SV7RjqNktsXs6tCsAUF1/fWRaiWhuhKfAuvK9Ob5r7pQw==
   dependencies:
     axios "^0.27.0"
 
