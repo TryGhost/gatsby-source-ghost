@@ -112,7 +112,7 @@ exports.sourceNodes = ({actions}, configOptions) => {
 
     const postAndPageFetchOptions = {
         limit: 'all',
-        include: 'tags,authors,feature_image_alt,feature_image_caption',
+        include: 'tags,authors',
         formats: 'html,plaintext',
         ...postAndPageFetchCustomOptions
     };
