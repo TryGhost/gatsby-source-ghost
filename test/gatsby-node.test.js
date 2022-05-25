@@ -17,7 +17,7 @@ describe('Basic Functionality', function () {
         gatsbyNode
             .sourceNodes({actions: {createNode}}, {})
             .then(() => {
-                createNode.callCount.should.eql(7);
+                createNode.callCount.should.eql(8);
 
                 const getFirstArg = call => createNode.getCall(call).args[0];
 
@@ -29,6 +29,7 @@ describe('Basic Functionality', function () {
                 getFirstArg(4).should.be.a.ValidGatsbyNode('GhostAuthor');
                 getFirstArg(5).should.be.a.ValidGatsbyNode('GhostAuthor');
                 getFirstArg(6).should.be.a.ValidGatsbyNode('GhostSettings');
+                getFirstArg(7).should.be.a.ValidGatsbyNode('GhostTiers');
 
                 done();
             })

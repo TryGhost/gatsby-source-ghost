@@ -174,6 +174,22 @@ type GhostNavigation {
 type GhostPostCount {
     posts: Int
 }
+
+type GhostTiers implements Node {
+    id: ID!
+    name: String!
+    description: String
+    slug: String!
+    active: Boolean!
+    type: String
+    welcome_page_url: String
+    created_at: Date @dateformat
+    updated_at: Date @dateformat
+    stripe_prices: String,
+    monthly_price: Int,
+    yearly_price: Int,
+    visibility: String!
+}
 `;
 
 module.exports = types;

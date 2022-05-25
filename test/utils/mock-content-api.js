@@ -38,13 +38,30 @@ const browseSettings = sinon.stub().resolves(
         codeinjection_foot: '<style><style>'
     }
 );
+const browseTiers = sinon.stub().resolves([
+    {
+        slug: 'gold-tier',
+        name: 'Gold Tier',
+        active: true,
+        type: 'paid',
+        welcome_page_url: '/welcome-to-gold',
+        created_at: '2022-03-15T18:15:36.000Z',
+        updated_at: '2022-03-15T18:16:00.000Z',
+        stripe_prices: 'p_029309820394',
+        monthly_price: 5,
+        yearly_price: 50,
+        benefits: ['Get a newsletter', 'Access all posts'],
+        visibility: 'public'
+    }
+]);
 const MockContentAPI = function () {
     return {
         posts: {browse: browsePosts},
         pages: {browse: browsePages},
         tags: {browse: browseTags},
         authors: {browse: browseAuthors},
-        settings: {browse: browseSettings}
+        settings: {browse: browseSettings},
+        tiers: {browse: browseTiers}
     };
 };
 

@@ -23,8 +23,8 @@ Plugin configuration for `gatsby-config.js`:
    options: {
        apiUrl: `https://<your-subdomain>.ghost.io`,
        contentApiKey: `<your content api key>`,
-       version: `v3` // Ghost API version, optional, defaults to "v3".
-                     // Pass in "v2" if your Ghost install is not on 3.0 yet!!!
+       version: `v5.0` // Ghost API version, optional, defaults to "v5.0".
+                     // Pass in "v4.0" if your Ghost install is not on 5.0 yet!!!
    }
 }
 ```

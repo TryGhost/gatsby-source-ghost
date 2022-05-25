@@ -15,7 +15,8 @@ const {
     PageNode,
     TagNode,
     AuthorNode,
-    SettingsNode
+    SettingsNode,
+    TiersNode
 } = require('./ghost-nodes');
 const _ = require(`lodash`);
 const cheerio = require(`cheerio`);
@@ -24,6 +25,8 @@ const cheerio = require(`cheerio`);
  * Import all custom ghost types.
  */
 const ghostTypes = require('./ghost-schema');
+
+let fetchTiers = null;
 
 /**
  * Extract specific tags from html and return them in a new object.
@@ -100,7 +103,11 @@ const transformCodeinjection = (posts) => {
  */
 exports.sourceNodes = ({actions}, configOptions) => {
     const {createNode} = actions;
-    const {apiUrl, contentApiKey, version, postAndPageFetchCustomOptions = {}} = configOptions;
+    let {apiUrl, contentApiKey, version = `v5.0`, postAndPageFetchCustomOptions = {}} = configOptions;
+
+    if (version.match(/^v\d$/)) {
+        version = version.replace(/^(v\d)$/, '$1.0');
+    }
 
     const api = ContentAPI.configure({apiUrl, contentApiKey, version});
 
@@ -194,12 +201,21 @@ exports.sourceNodes = ({actions}, configOptions) => {
         createNode(SettingsNode(setting));
     }).catch(ignoreNotFoundElseRethrow);
 
+    if (version.match(/^v5\.\d/)) {
+        api.tiers
+            .browse({include: 'benefits,monthly_price,yearly_price'})
+            .then((tiers) => {
+                tiers.forEach(tier => createNode(TiersNode(tier)));
+            }).catch(ignoreNotFoundElseRethrow);
+    }
+
     return Promise.all([
         fetchPosts,
         fetchPages,
         fetchTags,
         fetchAuthors,
-        fetchSettings
+        fetchSettings,
+        fetchTiers
     ]);
 };
 
