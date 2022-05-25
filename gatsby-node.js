@@ -8,7 +8,6 @@
  * https://ghost.org/docs/api/v3/
  */
 
-const Promise = require('bluebird');
 const ContentAPI = require('./content-api');
 const {
     PostNode,
