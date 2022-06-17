@@ -22,7 +22,7 @@
     "ship": "STATUS=$(git status --porcelain); echo $STATUS; if [ -z \"$STATUS\" ]; then yarn publish && git push --follow-tags; fi"
   },
   "devDependencies": {
-    "eslint": "8.17.0",
+    "eslint": "8.18.0",
     "eslint-plugin-ghost": "2.14.0",
     "mocha": "10.0.0",
     "proxyquire": "2.1.3",
