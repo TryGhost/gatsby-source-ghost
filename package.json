@@ -33,6 +33,6 @@
     "@tryghost/content-api": "1.11.0",
     "cheerio": "1.0.0-rc.11",
     "gatsby-node-helpers": "0.3.0",
-    "qs": "6.10.5"
+    "qs": "6.11.0"
   }
 }
