@@ -31,7 +31,7 @@
   },
   "dependencies": {
     "@tryghost/content-api": "1.11.5",
-    "cheerio": "1.0.0-rc.11",
+    "cheerio": "1.0.0-rc.12",
     "gatsby-node-helpers": "0.3.0",
     "qs": "6.11.0"
   }
