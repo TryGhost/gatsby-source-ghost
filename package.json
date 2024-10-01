@@ -12,7 +12,7 @@
     "gatsby-source-plugin"
   ],
   "engines": {
-    "node": "12.x || 14.x || 16.x || 18.x || 20.x"
+    "node": "18.x || 20.x"
   },
   "scripts": {
     "lint": "eslint . --ext .js --cache",
