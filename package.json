@@ -30,7 +30,7 @@
     "sinon": "15.0.3"
   },
   "dependencies": {
-    "@tryghost/content-api": "1.11.7",
+    "@tryghost/content-api": "1.11.15",
     "cheerio": "1.0.0-rc.12",
     "gatsby-node-helpers": "0.3.0",
     "qs": "6.11.1"
